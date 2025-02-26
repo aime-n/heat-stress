@@ -104,10 +104,35 @@ if weather_data:
         wbgt=wbgt
     )
     st.plotly_chart(fig)
+    st.markdown("""
+    ### Nível de Risco
+    <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px;">
+        <div style="background: #a8e6cf; padding: 8px; border-radius: 5px; flex: 1 1 100px;">
+            <strong>Seguro</strong><br>
+            &lt;27.8°C
+        </div>
+        <div style="background: #ffd3b6; padding: 8px; border-radius: 5px; flex: 1 1 100px;">
+            <strong>Atenção</strong><br>
+            27.8-29.3°C
+        </div>
+        <div style="background: #ffaaa5; padding: 8px; border-radius: 5px; flex: 1 1 100px;">
+            <strong>Atenção Extrema</strong><br>
+            29.4-31.0°C
+        </div>
+        <div style="background: #ff8b94; padding: 8px; border-radius: 5px; flex: 1 1 100px;">
+            <strong>Perigo</strong><br>
+            31.0-32.1°C
+        </div>
+        <div style="background: #ff0000; padding: 8px; border-radius: 5px; flex: 1 1 100px;">
+            <strong>Extremo Perigo</strong><br>
+            ≥32.1°C
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
+
 
     st.info(f"**Recomendação:** {advice}")
-
-
 
 
 #with tab1:
@@ -121,31 +146,5 @@ if weather_data:
 
 
 # Add some vertical space
-st.markdown("<br>", unsafe_allow_html=True)
 
 
-st.markdown("""
-### Nível de Risco
-<div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px;">
-    <div style="background: #a8e6cf; padding: 8px; border-radius: 5px; flex: 1 1 100px;">
-        <strong>Seguro</strong><br>
-        &lt;27.8°C
-    </div>
-    <div style="background: #ffd3b6; padding: 8px; border-radius: 5px; flex: 1 1 100px;">
-        <strong>Atenção</strong><br>
-        27.8-29.3°C
-    </div>
-    <div style="background: #ffaaa5; padding: 8px; border-radius: 5px; flex: 1 1 100px;">
-        <strong>Atenção Extrema</strong><br>
-        29.4-31.0°C
-    </div>
-    <div style="background: #ff8b94; padding: 8px; border-radius: 5px; flex: 1 1 100px;">
-        <strong>Perigo</strong><br>
-        31.0-32.1°C
-    </div>
-    <div style="background: #ff0000; padding: 8px; border-radius: 5px; flex: 1 1 100px;">
-        <strong>Extremo Perigo</strong><br>
-        ≥32.1°C
-    </div>
-</div>
-""", unsafe_allow_html=True)
