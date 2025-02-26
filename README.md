@@ -73,7 +73,7 @@ wbgt-app/
 ├── README.md               # This file
 ├── requirements.txt        # Python dependencies
 ├── cities.csv              # Brazilian cities data
-├── src/
+└── src/
     └── wbgt_app/           # Main application package
         ├── __init__.py     # Package initialization
         ├── app.py          # Streamlit app entry point
