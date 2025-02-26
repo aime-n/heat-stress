@@ -13,5 +13,6 @@ def show_about():
 
     **Versão:** 1.0.0  
     **Última atualização:** Fevereiro de 2025
+    **Desenvolvedora:** Aimê Nobrega
     """
 st.markdown(show_about())
