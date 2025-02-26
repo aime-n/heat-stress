@@ -3,7 +3,7 @@ from .calculations import calculate_black_globe, calculate_wet_bulb
 import plotly.graph_objects as go
 
 
-def create_wbgt_graph(current_temp, current_humidity, solar_radiation, wind_speed):
+def create_wbgt_graph(current_temp, current_humidity, solar_radiation, wind_speed, wbgt):
     """Create interactive WBGT risk zone plot with current conditions"""
     # Generate temperature and humidity grid
     temp_range = np.linspace(20, 50, 100)
@@ -56,7 +56,8 @@ def create_wbgt_graph(current_temp, current_humidity, solar_radiation, wind_spee
         ),
         line_width=0,
         opacity=0.7,
-        name='Risk Zones'
+        name='Risk Zones',
+        showscale=False
     ))
     
     # Add current conditions marker
@@ -74,7 +75,8 @@ def create_wbgt_graph(current_temp, current_humidity, solar_radiation, wind_spee
             f"Temp: {current_temp}°C<br>"
             f"Humidity: {current_humidity}%<br>"
             f"Solar: {solar_radiation}W/m²<br>"
-            f"Wind: {wind_speed}m/s"
+            f"Wind: {wind_speed}m/s<br>" 
+            f"WBGT: {wbgt:.1f}°C"   
         )
     ))
     
