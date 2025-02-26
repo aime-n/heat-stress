@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=42"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wbgt_app"
+version = "1.0.0"
+packages = ["wbgt_app"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+description = "WBGT Heat Stress Monitoring App"
+authors = [
+    {name="Your Name", email="your.email@example.com"}
+]
+dependencies = [
+    "streamlit>=1.32.0",
+    "requests>=2.31.0",
+    "numpy>=1.26.0",
+    "pandas>=2.1.0",
+    "plotly>=5.18.0",
+    "python-dotenv>=1.0.0"
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0"
+]
