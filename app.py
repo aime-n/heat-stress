@@ -21,7 +21,7 @@ if not BRAZIL_CITIES:
     st.error("No cities data available")
     st.stop()
 
-selected_city = st.selectbox("Select a Brazilian City:", list(BRAZIL_CITIES.keys()))
+selected_city = st.sidebar.selectbox("Select a Brazilian City:", list(BRAZIL_CITIES.keys()))
 
 # tab0, tab1, tab2, tab3 = st.tabs(["Monitor", "FAQ", "Accuracy", "About"])
 #with tab0:
