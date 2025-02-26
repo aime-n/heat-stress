@@ -21,7 +21,7 @@ if not BRAZIL_CITIES:
     st.error("No cities data available")
     st.stop()
 
-selected_city = st.selectbox("Select a Brazilian City:", list(BRAZIL_CITIES.keys()))
+selected_city = st.selectbox("Selecione uma cidade:", list(BRAZIL_CITIES.keys()))
 
 # tab0, tab1, tab2, tab3 = st.tabs(["Monitor", "FAQ", "Accuracy", "About"])
 #with tab0:
@@ -40,7 +40,7 @@ if weather_data:
     
     # Display all metrics and visualizations
     category, advice = get_heat_category(wbgt)
-    st.subheader(f"Current Conditions in {selected_city}: {category}")
+    st.subheader(f"Condições atuais em {selected_city}: {category}")
 
     # In your main app code where you display the metrics:
     with st.sidebar:
@@ -55,19 +55,19 @@ if weather_data:
         
         # Basic weather metrics group
     #if show_basic:
-        st.metric("### **Calculated WBGT**:",  "{:.1f}°C".format(wbgt))
+        st.metric("### **WBGT Calculado**:",  "{:.1f}°C".format(wbgt))
         #cols[0].metric("🌡️ Temperature", f"{weather_data['temp']:.1f}°C")
         #cols[0].metric("💧 Humidity", f"{weather_data['humidity']}%")
         #cols[1].metric("Solar Radiation", f"{weather_data['solar_radiation']} W/m²")
         #cols[1].metric("🌬️ Wind Speed", f"{weather_data['wind_speed']} m/s")
         
-        st.header("WBGT Calculation")
+        st.header("Métricas para o Cálculo do WBGT")
         # WBGT calculation components group
         cols = st.columns(2)
-        cols[0].metric("Wet Bulb", f"{calculate_wet_bulb(weather_data['temp'], weather_data['humidity']):.1f}°C")
-        cols[0].metric("Black Globe", f"{tg:.1f}°C")
-        cols[1].metric("Dry Bulb", f"{weather_data['temp']:.1f}°C")
-        cols[1].metric("Stations", f"{weather_data['station_count']}")
+        cols[0].metric("Termômetro de Bulbo Úmido", f"{calculate_wet_bulb(weather_data['temp'], weather_data['humidity']):.1f}°C")
+        cols[0].metric("Termômetro de Globo", f"{tg:.1f}°C")
+        cols[1].metric("Termômetro Seco", f"{weather_data['temp']:.1f}°C")
+        cols[1].metric("Estações", f"{weather_data['station_count']}")
     # cols = st.columns(4)
     #cols[0].metric("Temperature", f"{weather_data['temp']:.1f}°C")
     #cols[1].metric("Humidity", f"{weather_data['humidity']}%")
@@ -105,7 +105,7 @@ if weather_data:
     )
     st.plotly_chart(fig)
 
-    st.info(f"**Recommendation:** {advice}")
+    st.info(f"**Recomendação:** {advice}")
 
 
 
@@ -125,26 +125,26 @@ st.markdown("<br>", unsafe_allow_html=True)
 
 
 st.markdown("""
-### Risk Level Legend
+### Legenda de Nível de Risco
 <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px;">
     <div style="background: #a8e6cf; padding: 8px; border-radius: 5px; flex: 1 1 100px;">
-        <strong>Safe</strong><br>
+        <strong>Seguro</strong><br>
         &lt;27.8°C
     </div>
     <div style="background: #ffd3b6; padding: 8px; border-radius: 5px; flex: 1 1 100px;">
-        <strong>Caution</strong><br>
+        <strong>Atenção</strong><br>
         27.8-29.3°C
     </div>
     <div style="background: #ffaaa5; padding: 8px; border-radius: 5px; flex: 1 1 100px;">
-        <strong>Extreme Caution</strong><br>
+        <strong>Atenção Extrema</strong><br>
         29.4-31.0°C
     </div>
     <div style="background: #ff8b94; padding: 8px; border-radius: 5px; flex: 1 1 100px;">
-        <strong>Danger</strong><br>
+        <strong>Perigo</strong><br>
         31.0-32.1°C
     </div>
     <div style="background: #ff0000; padding: 8px; border-radius: 5px; flex: 1 1 100px;">
-        <strong>Extreme Danger</strong><br>
+        <strong>Extremo Perigo</strong><br>
         ≥32.1°C
     </div>
 </div>

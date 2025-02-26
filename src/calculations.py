@@ -23,14 +23,14 @@ def calculate_wbgt(temp, humidity, solar_radiation, wind_speed):
     return 0.7 * tw + 0.2 * tg + 0.1 * temp
 
 def get_heat_category(wbgt):
-    """Categorize heat risk based on WBGT thresholds"""
+    """Classifica o risco de calor com base nos limites de WBGT e dá diretrizes de atividades"""
     if wbgt < 27.8:
-        return "✅ Safe", "Normal activities"
+        return "✅ Tranquilo", "Pode seguir as atividades externas, sem limitações."
     elif 27.8 <= wbgt < 29.4:
-        return "⚠️ Caution", "Increase hydration breaks"
+        return "⚠️ Fique esperto", "Aumente a hidratação e evite longos períodos sob o sol."
     elif 29.4 <= wbgt < 31.0:
-        return "🚨 Extreme Caution", "Limit outdoor activities"
+        return "🚨 Cuidado Extremo", "Limite as atividades externas. Evite exposição prolongada ao sol."
     elif 31.0 <= wbgt < 32.1:
-        return "🔥 Danger", "Cancel non-essential outdoor work"
+        return "🔥 Perigo", "Cancele atividades externas não essenciais. Descanse em ambientes frescos."
     else:
-        return "💀 Extreme Danger", "Avoid all outdoor activities"
+        return "💀 Perigo Extremo", "Evite sair de casa. Se necessário, use proteção intensa contra o sol."
