@@ -3,30 +3,30 @@ import streamlit as st
 
 def show_faq():
     return """
-    ### Frequently Asked Questions
+    ### Perguntas Frequentes
     
-    **Q: What is WBGT?**  
-    A: Wet Bulb Globe Temperature is a measure of how hot it feels in direct sunlight.
-    It combines:
-    - Temperature 🌡️
-    - Humidity 💧
-    - Wind 🌬️
-    - Solar radiation ☀️
-    The WBGT is used to assess heat stress and determine safe exposure levels to high temperatures. 
+    **P: O que é o WBGT?**  
+    R: O Wet Bulb Globe Temperature (WBGT) é uma medida de como o calor é percebido sob luz solar direta.
+    Ele combina:
+    - Temperatura 🌡️
+    - Umidade 💧
+    - Vento 🌬️
+    - Radiação solar ☀️
+    O WBGT é utilizado para avaliar o estresse térmico e determinar níveis seguros de exposição a altas temperaturas.
 
-    **Q: How often is data updated?**  
-    A: Every 15-60 minutes from weather stations
+    **P: Com que frequência os dados são atualizados?**  
+    R: A cada 15-60 minutos a partir das estações meteorológicas
 
-    **Q: Can I use this for workplace safety?**  
-    A: Use as guidance only - always verify with on-site measurements
-                        
-    **Q: Who uses WBGT?**  
-    A: Industrial hygienists, athletes, sporting events, the military, some workplaces and apparently you. 
+    **P: Posso usar isso para segurança no local de trabalho?**  
+    R: Use apenas como orientação - sempre verifique com medições no local
 
-    **Q: How does WBGT compare to the heat index?**  
-    A:
-    - The WBGT is used to measure heat stress in direct sunlight, while the heat index is used to measure heat stress in shady areas
-    - The WBGT is based on more factors than the heat index
+    **P: Quem usa o WBGT?**  
+    R: Higienistas industriais, atletas, eventos esportivos, militares, alguns ambientes de trabalho e, aparentemente, você.
+
+    **P: Como o WBGT se compara ao índice de calor?**  
+    R:
+    - O WBGT é usado para medir o estresse térmico sob luz solar direta, enquanto o índice de calor é usado para medir o estresse térmico em áreas sombreadas
+    - O WBGT leva em consideração mais fatores do que o índice de calor
     """
 
 

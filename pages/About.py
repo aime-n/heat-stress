@@ -3,15 +3,15 @@ import streamlit as st
 
 def show_about():
     return """
-    ## About This App
+    ## Sobre Este App
     
-    **Purpose:**  
-    Provide real-time heat stress monitoring for Brazil using:
-    - Open-source data 🌐
-    - Medical safety guidelines 🩺
-    - Weather API integration ⚙️
+    **Objetivo:**  
+    Fornecer monitoramento em tempo real de estresse térmico para o Brasil usando:
+    - Dados de código aberto 🌐
+    - Diretrizes de segurança médica 🩺
+    - Integração com API de clima ⚙️
 
-    **Version:** 1.0.0  
-    **Last Updated:** February 2025
+    **Versão:** 1.0.0  
+    **Última atualização:** Fevereiro de 2025
     """
 st.markdown(show_about())
