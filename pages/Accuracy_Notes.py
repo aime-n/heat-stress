@@ -1,3 +1,5 @@
+import streamlit as st
+
 def show_accuracy_notes():
     return """
 ## WBGT Calculation Accuracy Notes
@@ -56,3 +58,6 @@ def show_accuracy_notes():
 - 🌆 Urban heat islands not captured
 - 🌙 Nighttime artificial heat not included
     """
+
+
+st.markdown(show_accuracy_notes())

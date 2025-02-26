@@ -1,3 +1,6 @@
+import streamlit as st
+
+
 def show_faq():
     return """
     ### Frequently Asked Questions
@@ -25,3 +28,6 @@ def show_faq():
     - The WBGT is used to measure heat stress in direct sunlight, while the heat index is used to measure heat stress in shady areas
     - The WBGT is based on more factors than the heat index
     """
+
+
+st.markdown(show_faq())

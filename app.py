@@ -3,15 +3,19 @@ from src.api_client import get_weather_data_visualcrossing
 from src.calculations import calculate_wbgt, get_heat_category, calculate_black_globe, calculate_wet_bulb
 from src.visualization import create_wbgt_graph
 from src.data_loader import load_cities
-from src.tabs import faq, accuracy_notes, about
 
 st.set_page_config(
-    page_title="WBGT Heat Stress monitor",
-    # layout="wide",
-)
-
+                   page_icon=None, 
+                   page_title="WBGT Heat Stress monitor",
+                   layout="centered", 
+                   initial_sidebar_state="collapsed", 
+                   menu_items=None)
 
 BRAZIL_CITIES = load_cities()
+
+st.sidebar.markdown("oii")
+
+
 
 # Streamlit UI setup
 st.title("🌡️ WBGT Heat Stress Monitor")

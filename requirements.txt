@@ -4,3 +4,4 @@ python-dotenv
 numpy
 requests
 plotly
+st-pages
