@@ -125,7 +125,7 @@ st.markdown("<br>", unsafe_allow_html=True)
 
 
 st.markdown("""
-### Legenda de Nível de Risco
+### Nível de Risco
 <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px;">
     <div style="background: #a8e6cf; padding: 8px; border-radius: 5px; flex: 1 1 100px;">
         <strong>Seguro</strong><br>
