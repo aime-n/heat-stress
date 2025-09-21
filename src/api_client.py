@@ -14,7 +14,8 @@ def get_weather_data_open_meteo(lat, lon):
     params = {
         "latitude": lat,
         "longitude": lon,
-        "hourly": "temperature_2m,relative_humidity_2m,wind_speed_10m,shortwave_radiation",
+        "hourly": "temperature_2m,relative_humidity_2m,wind_speed_10m, " 
+        "shortwave_radiation",
         "timezone": "auto",
         "forecast_days": 1
     }
@@ -33,6 +34,7 @@ def get_weather_data_open_meteo(lat, lon):
             "humidity": data["hourly"]["relative_humidity_2m"][hour_index],
             "wind_speed": data["hourly"]["wind_speed_10m"][hour_index],
             "solar_radiation": data["hourly"]["shortwave_radiation"][hour_index],
+            "station_count": 0
         }
     except Exception as e:
         st.error(f"Error fetching weather data: {e}")
@@ -41,7 +43,7 @@ def get_weather_data_open_meteo(lat, lon):
 
 def get_weather_data_visualcrossing(lat, lon):
     """Fetch weather data from Visual Crossing API"""
-    base_url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/"
+    base_url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline"
     params = {
         "unitGroup": "metric",
         "include": "current",
@@ -51,6 +53,7 @@ def get_weather_data_visualcrossing(lat, lon):
     
     try:
         response = requests.get(f"{base_url}/{lat},{lon}/today", params=params)
+
         response.raise_for_status()
         data = response.json()
         current = data["currentConditions"]

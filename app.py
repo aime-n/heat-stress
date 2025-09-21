@@ -1,6 +1,6 @@
 import streamlit as st
 from src.api_client import get_weather_data_visualcrossing
-from src.calculations import calculate_wbgt, get_heat_category, calculate_black_globe, calculate_wet_bulb
+from src.calculations import calculate_wbgt, get_heat_category, calculate_black_globe, calculate_wet_bulb, wbt
 from src.visualization import create_wbgt_graph
 from src.data_loader import load_cities
 
@@ -8,7 +8,7 @@ st.set_page_config(
                    page_icon=None, 
                    page_title="WBGT Heat Stress monitor",
                    #layout="centered", 
-                   initial_sidebar_state="collapsed", 
+                   #initial_sidebar_state="collapsed", 
                    menu_items=None)
 
 BRAZIL_CITIES = load_cities()
@@ -37,6 +37,8 @@ if weather_data:
                         weather_data["humidity"],
                         weather_data["solar_radiation"],
                         weather_data["wind_speed"])
+    tb = wbt(weather_data['temp'], 
+             weather_data['humidity'])
     
     # Display all metrics and visualizations
     category, advice = get_heat_category(wbgt)
@@ -64,15 +66,16 @@ if weather_data:
         st.header("Métricas para o Cálculo do WBGT")
         # WBGT calculation components group
         cols = st.columns(2)
-        cols[0].metric("Termômetro de Bulbo Úmido", f"{calculate_wet_bulb(weather_data['temp'], weather_data['humidity']):.1f}°C")
+        cols[0].metric("Termômetro de Bulbo Úmido", f"{tb:.1f}°C")
         cols[0].metric("Termômetro de Globo", f"{tg:.1f}°C")
         cols[1].metric("Termômetro Seco", f"{weather_data['temp']:.1f}°C")
         cols[1].metric("Estações", f"{weather_data['station_count']}")
-    # cols = st.columns(4)
-    #cols[0].metric("Temperature", f"{weather_data['temp']:.1f}°C")
-    #cols[1].metric("Humidity", f"{weather_data['humidity']}%")
-    #cols[2].metric("Solar Radiation", f"{weather_data['solar_radiation']} W/m²")
-    #cols[3].metric("Wind Speed", f"{weather_data['wind_speed']} m/s")
+    
+        cols = st.columns(2)
+        cols[0].metric("Temperature", f"{weather_data['temp']:.1f}°C")
+        cols[0].metric("Humidity", f"{weather_data['humidity']}%")
+        cols[1].metric("Solar Radiation", f"{weather_data['solar_radiation']} W/m²")
+        cols[1].metric("Wind Speed", f"{weather_data['wind_speed']} m/s")
 
     # st.subheader("WBGT Calculation")
     #cols = st.columns(4)
@@ -105,7 +108,7 @@ if weather_data:
     )
     st.plotly_chart(fig)
     st.markdown("""
-    ### Nível de Risco
+    ### Nível de Risco 
     <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px;">
         <div style="background: #a8e6cf; padding: 8px; border-radius: 5px; flex: 1 1 100px;">
             <strong>Seguro</strong><br>

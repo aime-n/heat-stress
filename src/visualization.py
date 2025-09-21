@@ -1,7 +1,12 @@
 import numpy as np
 from .calculations import calculate_black_globe, calculate_wet_bulb
 import plotly.graph_objects as go
-
+import plotly.express as px
+from src.config import color_scale, BRAZIL_GEOJSON
+import matplotlib.pyplot as plt
+import cartopy.crs as ccrs
+import cartopy.feature as cfeature
+import scipy
 
 def create_wbgt_graph(current_temp, current_humidity, solar_radiation, wind_speed, wbgt):
     """Create interactive WBGT risk zone plot with current conditions"""
@@ -30,18 +35,18 @@ def create_wbgt_graph(current_temp, current_humidity, solar_radiation, wind_spee
     
     # Create plot
     fig = go.Figure()
-    
+
     # Add risk zones with proper color mapping
     fig.add_trace(go.Contour(
         x=temp_range,
         y=humidity_range,
         z=risk_levels,
         colorscale=[
-            [0.0, '#a8e6cf'],   # Safe (0)
-            [0.2, '#ffd3b6'],   # Caution (1)
-            [0.4, '#ffaaa5'],   # Extreme Caution (2)
-            [0.6, '#ff8b94'],   # Danger (3)
-            [1.0, '#ff0000']    # Extreme Danger (4)
+            [0.0, color_scale['Seguro']],   # Safe (0)
+            [0.2, color_scale['Cuidado']],   # Caution (1)
+            [0.4, color_scale['Cuidado Extremo']],   # Extreme Caution (2)
+            [0.6, color_scale['Perigo']],   # Danger (3)
+            [1.0, color_scale['Perigo Extremo']]    # Extreme Danger (4)
         ],
         colorbar=dict(
             title='Risk Level',
@@ -90,4 +95,158 @@ def create_wbgt_graph(current_temp, current_humidity, solar_radiation, wind_spee
         hovermode="closest"
     )
     
+    return fig
+
+
+# Função para criar o mapa
+def create_brazil_heatmap(cities_data):
+    
+    # Criar mapa coroplético
+    fig = px.choropleth(
+        cities_data,
+        geojson=BRAZIL_GEOJSON,
+        featureidkey="properties.name",
+        locations="Estado",
+        color="Categoria WBGT",
+        color_discrete_map=color_scale,
+        scope="south america",
+        hover_name="Estado",
+        hover_data={"WBGT Médio": ":.1f°C"},
+        labels={'WBGT': 'Temperatura de Bulbo Úmido Globais (°C)'},
+        height=600
+    )
+    
+    # Ajustar layout do mapa
+    fig.update_geos(fitbounds="locations", visible=False)
+    fig.update_layout(
+        margin={"r":0,"t":0,"l":0,"b":0},
+        geo=dict(bgcolor='rgba(0,0,0,0)'),
+        paper_bgcolor='rgba(0,0,0,0)'
+    )
+    
+    return fig
+
+
+def highlight_row(row):
+    # For each cell in the row, return a style with the background color from 'color_column'
+    return [f'background-color: {row["color_column"]}' for _ in row]
+
+
+import matplotlib.pyplot as plt
+import cartopy.crs as ccrs
+import cartopy.feature as cfeature
+import streamlit as st
+import matplotlib.pyplot as plt
+import cartopy.crs as ccrs
+import cartopy.feature as cfeature
+import numpy as np
+
+def plot_wbgt_contour(df):
+    """
+    Plots a contour map of WBGT values from a DataFrame using Cartopy.
+    
+    The DataFrame should have the following columns:
+      - 'lat'  : Latitude (in degrees).
+      - 'lon'  : Longitude (in degrees).
+      - 'WBGT' : WBGT measurement.
+
+    Returns:
+        fig (matplotlib.figure.Figure): The figure object for further rendering.
+
+    Usage:
+        fig = plot_wbgt_contour(df)
+        st.pyplot(fig)  # In Streamlit
+    """
+    fig = plt.figure(figsize=(12, 6))
+    ax = fig.add_subplot(1, 1, 1, projection=ccrs.Mollweide())
+
+    # Extract WBGT data
+    lons = df['lon'].values
+    lats = df['lat'].values
+    wbgt = df['WBGT'].values
+
+    # Create a grid for contour plotting
+    lon_grid, lat_grid = np.meshgrid(
+        np.linspace(lons.min(), lons.max(), 100),
+        np.linspace(lats.min(), lats.max(), 100)
+    )
+    
+    # Interpolate data onto the grid
+    from scipy.interpolate import griddata
+    wbgt_grid = griddata((lons, lats), wbgt, (lon_grid, lat_grid), method='cubic')
+
+    # Plot contour map
+    contour = ax.contourf(lon_grid, lat_grid, wbgt_grid,
+                          transform=ccrs.PlateCarree(),
+                          cmap='nipy_spectral')
+
+    # Add geographic features
+    ax.coastlines()
+    ax.add_feature(cfeature.BORDERS, linewidth=0.5)
+    ax.set_global()
+
+    # Add colorbar
+    cbar = fig.colorbar(contour, orientation='horizontal', pad=0.05)
+    cbar.set_label("WBGT Index")
+
+    return fig
+
+
+import matplotlib.pyplot as plt
+import cartopy.crs as ccrs
+import cartopy.feature as cfeature
+import numpy as np
+from scipy.interpolate import griddata
+
+def plot_wbgt_contour_brazil(df):
+    """
+    Plots a contour map of WBGT values over Brazil using Cartopy.
+
+    The DataFrame should have the following columns:
+      - 'lat'  : Latitude (in degrees).
+      - 'lon'  : Longitude (in degrees).
+      - 'WBGT' : WBGT measurement.
+
+    Returns:
+        fig (matplotlib.figure.Figure): The figure object for further rendering.
+
+    Usage:
+        fig = plot_wbgt_contour_brazil(df)
+        st.pyplot(fig)  # In Streamlit
+    """
+    fig = plt.figure(figsize=(10, 8))
+    ax = fig.add_subplot(1, 1, 1, projection=ccrs.PlateCarree())
+
+    # Brazil boundaries
+    ax.set_extent([-74, -34, -35, 5], crs=ccrs.PlateCarree())
+
+    # Extract WBGT data
+    lons = df['lon'].values
+    lats = df['lat'].values
+    wbgt = df['WBGT'].values
+
+    # Create a grid for contour plotting
+    lon_grid, lat_grid = np.meshgrid(
+        np.linspace(lons.min(), lons.max(), 100),
+        np.linspace(lats.min(), lats.max(), 100)
+    )
+    
+    # Interpolate data onto the grid
+    wbgt_grid = griddata((lons, lats), wbgt, (lon_grid, lat_grid), method='cubic')
+
+    # Plot contour map
+    contour = ax.contourf(lon_grid, lat_grid, wbgt_grid,
+                          transform=ccrs.PlateCarree(),
+                          cmap='nipy_spectral')
+
+    # Add geographic features
+    ax.coastlines(resolution='10m', linewidth=1)
+    ax.add_feature(cfeature.BORDERS, linewidth=0.5)
+    ax.add_feature(cfeature.LAND, facecolor='lightgray', alpha=0.5)
+    ax.add_feature(cfeature.OCEAN, facecolor='lightblue', alpha=0.3)
+
+    # Add colorbar
+    cbar = fig.colorbar(contour, orientation='horizontal', pad=0.05)
+    cbar.set_label("WBGT Index")
+
     return fig

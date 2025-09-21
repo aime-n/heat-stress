@@ -1,13 +1,29 @@
-city,lat,lon
-São Paulo,-23.5505,-46.6333
-Rio de Janeiro,-22.9068,-43.1729
-Brasília,-15.7975,-47.8919
-Salvador,-12.9714,-38.5014
-Fortaleza,-3.7275,-38.5275
-Belo Horizonte,-19.9167,-43.9345
-Manaus,-3.1190,-60.0217
-Curitiba,-25.4296,-49.2719
-Recife,-8.0500,-34.9000
-Porto Alegre,-30.0331,-51.2300
-Campinas,-22.9051, -47.0613
-São Carlos, -22.0123, -47.8908
+city,lat,lon,state
+São Paulo,-23.5505,-46.6333,São Paulo
+Rio de Janeiro,-22.9068,-43.1729,Rio de Janeiro
+Brasília,-15.7975,-47.8919,Distrito Federal
+Salvador,-12.9714,-38.5014,Bahia
+Fortaleza,-3.7275,-38.5275,Ceará
+Belo Horizonte,-19.9167,-43.9345,Minas Gerais
+Manaus,-3.1190,-60.0217,Amazonas
+Curitiba,-25.4296,-49.2719,Paraná
+Recife,-8.0500,-34.9000,Pernambuco
+Porto Alegre,-30.0331,-51.2300,Rio Grande do Sul
+Campinas,-22.9051,-47.0613,São Paulo
+São Carlos,-22.0123,-47.8908,São Paulo
+Goiânia,-16.6869,-49.2648,Goiás
+Campo Grande,-20.4697,-54.6201,Mato Grosso do Sul
+Cuiabá,-15.6010,-56.0974,Mato Grosso
+Florianópolis,-27.5969,-48.5495,Santa Catarina
+São Luís,-2.5307,-44.3068,Maranhão
+Teresina,-5.0892,-42.8016,Piauí
+Natal,-5.7793,-35.2009,Rio Grande do Norte
+João Pessoa,-7.1195,-34.8450,Paraíba
+Aracaju,-10.9472,-37.0730,Sergipe
+Palmas,-10.2491,-48.3243,Tocantins
+Porto Velho,-8.7618,-63.9019,Rondônia
+Rio Branco,-9.9747,-67.8100,Acre
+Macapá,0.0389,-51.0664,Amapá
+Boa Vista,2.8195,-60.6714,Roraima
+Vitória,-20.3194,-40.3375,Espírito Santo
+Belém, -1.4558, -48.5039,Pará
